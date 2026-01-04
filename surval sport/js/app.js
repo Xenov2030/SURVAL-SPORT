@@ -24,13 +24,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. LÓGICA DE VEHÍCULOS (Surval Sport)
     const vehiculos = {
-        Ford: ["Fiesta", "Focus", "Ka", "Ranger", "Mustang"],
+        Ford: ["Territory", "Bronco Sport", "Bronco","Kuga","Mustang", "Transit", "Ranger", "EcoSport", "Focus", "Fiesta", "Mondeo",],
         Chevrolet: ["Corsa", "Cruze", "Onix", "Tracker", "S10"],
         Volkswagen: ["Gol", "Polo", "Vento", "Amarok", "Golf"],
         Toyota: ["Corolla", "Hilux", "Etios", "Yaris", "SW4"],
-        Peugeot: ["206", "207", "208", "308", "Partner"],
+        Peugeot: ["206", "207", "208", "308", "Partner", "Fiesta"],
         BMW: ["Serie 1", "Serie 3", "Serie 5", "X1", "X5"],
-        Audi: ["A3", "A4", "A6", "Q3", "Q5"]
+        Audi: ["A3", "A4", "A6", "Q3", "Q5"],
+        Renault: ["Clio", "Kangoo", "Sandero", "Duster", "Logan", "kwid", "Captur", "torino"],
+        Mercedez: ["Clase A", "Clase C", "Clase E", "GLA", "GLE"],
+        Nissan: ["March", "Sentra", "Versa", "Frontier", "X-Trail"],
+        Dodge: ["Ram 1500", "Durango", "Challenger", "Charger", "Journey"],
+        Suzuki: ["Swift", "Vitara", "Jimny", "Baleno", "Celerio"],
+        Honda: ["Civic", "Accord", "Fit", "CR-V", "HR-V"],
+        Fiat: ["Palio", "Siena", "Cronos", "Toro", "Strada"],
+        Subaru: ["Impreza", "Forester", "Outback", "XV", "WRX"],
+        Mazda: ["Mazda2", "Mazda3", "CX-3", "CX-5", "MX-5"],
+        Tesla: ["Model 3", "Model Y", "Model S", "Model X", "Cybertruck"],
+        Jeep: ["Renegade", "Compass", "Wrangler", "Grand Cherokee", "Cherokee"],
+        Chery: ["Tiggo 2", "Tiggo 3", "Tiggo 5", "Arrizo 5", "Otro"],
+        Hyundai: ["i10", "i20", "Tucson", "Santa Fe", "Elantra"],
+        Kia: ["Picanto", "Rio", "Sportage", "Sorento", "Cerato"],
+        Otro: ["Otro"],
     };
 
     const resenas = [
