@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>SURVAL SPORT | Performance & Precision</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,300;0,600;0,800;1,700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <img src="assets/logo2.0.png" alt="Surval Sport Logo">
+            </a>
+
+            <button class="menu-toggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav-menu">
+                <a href="#nosotros">Experiencia</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#galeria">Galería</a>
+                <a href="#resenas">Opiniones</a>
+                <a href="#contacto" class="btn-nav">Solicitar Turno</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="reveal">SEGURIDAD Y <span>CONTROL</span> ABSOLUTO</h1>
+                    <p>Especialistas en tren delantero y suspensión de alta gama. Precisión deportiva para conductores
+                        exigentes.</p>
+                    <a href="#servicios" class="btn-main">VER SERVICIOS</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="about">
+            <div class="container about-grid">
+                <div class="about-img">
+                    <img src="assets/logo.jpeg" alt="Surval Sport Workshop">
+                </div>
+                <div class="about-text">
+                    <h2>MÁS QUE UN TALLER, <span>PRECISIÓN DEPORTIVA</span></h2>
+                    <p>En <strong>Surval Sport</strong> atendemos cada vehículo con la rigurosidad de la alta
+                        competición. Nos especializamos en mecánica de precisión para tren delantero, frenos y
+                        suspensión.</p>
+
+                    <div class="horarios-container">
+                        <h3>HORARIOS DE <span>ATENCIÓN</span></h3>
+                        <div class="horario-item">
+                            <span>Lunes a Viernes</span>
+                            <p>09:00 a 13:00 — 16:00 a 19:30</p>
+                        </div>
+                        <div class="horario-item">
+                            <span>Sábados</span>
+                            <p>09:00 a 13:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="booking-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>NUESTROS <span>SERVICIOS</span></h2>
+                    <p>Selecciona la especialidad y completa los datos de tu vehículo</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" data-service="Alineación y Balanceo">
+                        <span class="service-number">01</span>
+                        <h3>Alineación y Balanceo</h3>
+                    </div>
+                    <div class="service-card" data-service="Tren Delantero">
+                        <span class="service-number">02</span>
+                        <h3>Tren Delantero</h3>
+                    </div>
+                    <div class="service-card" data-service="Suspensión">
+                        <span class="service-number">03</span>
+                        <h3>Suspensión</h3>
+                    </div>
+                    <div class="service-card" data-service="Frenos">
+                        <span class="service-number">04</span>
+                        <h3>Frenos</h3>
+                    </div>
+                </div>
+
+                <div id="contacto" class="booking-form">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label>Marca</label>
+                            <select id="marca">
+                                <option value="">Seleccione Marca</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Modelo</label>
+                            <select id="modelo" disabled>
+                                <option value="">Seleccione Modelo</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Año</label>
+                            <select id="anio">
+                                <option value="">Seleccione Año</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p id="error-msg" class="error-text">Completa todos los campos para continuar.</p>
+                    <button id="sendWhatsapp" class="btn-whatsapp">SOLICITAR TURNO VÍA WHATSAPP</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="galeria" class="instagram-gallery">
+            <div class="container">
+                <div class="section-header">
+                    <h2>NUESTRO <span>TRABAJO</span></h2>
+                </div>
+                <div class="gallery-grid">
+                   
+                    <a href="https://www.instagram.com/surval.sport/" target="_blank" class="gallery-item"> <img src="assets/1.jpeg" alt="">
+                        <div class="placeholder-img"><span></span></div>
+                    </a>
+                    <a href="https://www.instagram.com/surval.sport/" target="_blank" class="gallery-item">
+                        <div class="placeholder-img"><span><img src="assets/2.jpeg" alt=""></span></div>
+                    </a>
+                    <a href="https://www.instagram.com/surval.sport/" target="_blank" class="gallery-item">
+                        <div class="placeholder-img"><span><img src="assets/3.jpeg" alt=""></span></div>
+                    </a>
+                </div>
+                <div class="center-btn">
+                    <a href="https://www.instagram.com/surval.sport/" target="_blank" class="btn-main">VER MÁS EN
+                        INSTAGRAM</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="resenas" class="reviews-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>LO QUE DICEN NUESTROS <span>CLIENTES</span></h2>
+                </div>
+                <div class="reviews-grid" id="reviews-container"></div>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="map-section">
+            <div class="container">
+                <h2>DONDE <span>ESTAMOS</span></h2>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3349.8265054476406!2d-68.86453852494878!3d-32.902755069672075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09a14148cd0b%3A0xde592e634a8b7b57!2sSurVal%20sport!5e0!3m2!1ses!2sar!4v1767565112024!5m2!1ses!2sar"
+                        width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FONT AWESOME -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<footer class="footer">
+
+    <!-- Banner full width -->
+    <div class="footer-banner">
+        <img src="assets/footer.jpeg" alt="Surval Sport">
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="footer-socials">
+        <a href="https://wa.me/5492613382725"
+           target="_blank"
+           aria-label="WhatsApp"
+           class="social-icon whatsapp">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+
+        <a href="https://www.instagram.com/surval.sport/"
+           target="_blank"
+           aria-label="Instagram"
+           class="social-icon instagram">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- Copy -->
+    <div class="footer-copy">
+        <p>
+            © 2026 Surval Sport · Desarrollado por
+            <a href="https://portfolionicolasaguirres.netlify.app/"
+               target="_blank"
+               rel="noopener noreferrer">
+               Nicolas Aguirres
+            </a>
+        </p>
+    </div>
+
+</footer>
+
+
+
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
