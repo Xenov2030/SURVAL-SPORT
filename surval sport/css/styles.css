@@ -40,25 +40,120 @@ span { color: var(--gold); }
 .header-container { display: flex; justify-content: space-between; align-items: center; }
 .logo img { height: 150px; }
 
-/* Menú Mobile-First (Oculto por defecto) */
-.menu-toggle {
-    display: flex; flex-direction: column; gap: 6px;
-    background: none; border: none; cursor: pointer; z-index: 3000;
+/* --- CORRECCIÓN GLOBAL DE SCROLL LATERAL --- */
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Evita el scroll horizontal fatal */
+    position: relative;
 }
-.menu-toggle span { width: 30px; height: 2px; background: var(--gold); transition: var(--transition); }
 
-.nav-menu {
-    position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
-    background: var(--secondary-black);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 2rem; transition: 0.5s ease; z-index: 2500;
+/* --- ESTILOS DEL BOTÓN HAMBURGUESA --- */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 3001; /* Por encima de la navegación */
+    padding: 0;
 }
-.nav-menu.active { right: 0; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
-.nav-menu a { color: var(--white); text-decoration: none; font-family: var(--font-main); font-weight: 600; font-size: 1.2rem; hover: color var(--gold); }
+
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--gold); /* Usando tu variable existente */
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+/* Animación a X cuando está activo */
+.menu-toggle.active .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.active .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* --- NAVEGACIÓN MOBILE (100% OCULTA) --- */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%; /* Ancho del menú en mobile */
+    max-width: 320px;
+    height: 100vh;
+    background-color: var(--secondary-black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    
+    /* ESTADO INICIAL: 100% fuera de la pantalla a la derecha */
+    transform: translateX(100%); 
+    transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+    z-index: 3000;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    will-change: transform;
+}
+
+/* ESTADO ACTIVO */
+.nav-menu.active {
+    transform: translateX(0);
+}
+
+.nav-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--font-main);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
 .nav-menu a:hover { color: var(--gold); }
-.btn-nav {
-    border: 1px solid var(--gold); padding: 0.8rem 2rem; text-decoration: none;
-    font-family: var(--font-main); font-weight: 700; display: inline-block;
+
+/* Overlay de fondo */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 2999;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- MEDIA QUERY: ESCRITORIO --- */
+@media (min-width: 1024px) {
+    .menu-toggle, .menu-overlay {
+        display: none;
+    }
+
+    .nav-menu {
+        position: static;
+        width: auto;
+        max-width: none;
+        height: auto;
+        background: none;
+        flex-direction: row;
+        transform: translateX(0); /* Siempre visible */
+        box-shadow: none;
+        gap: 1.5rem;
+    }
+
+    .nav-menu a {
+        font-size: 0.9rem;
+    }
 }
 /* HERO MOBILE-FIRST */
 .hero {
