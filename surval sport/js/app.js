@@ -48,31 +48,15 @@ document.addEventListener('DOMContentLoaded', () => {
         Otro: ["Otro"],
     };
 
-    const resenas = [
-        { nombre: "Facundo Pereyra", texto: "Excelente atención para autos deportivos. Recomendado." },
-        { nombre: "Martín Rodríguez", texto: "Honestidad total en el diagnóstico. Muy profesionales." },
-        { nombre: "Luciana Gómez", texto: "El sistema de turnos por WhatsApp es rapidísimo. 10 puntos." }
-    ];
-
     const marcaSelect = document.getElementById('marca');
     const modeloSelect = document.getElementById('modelo');
     const anioSelect = document.getElementById('anio');
     const serviceCards = document.querySelectorAll('.service-card');
     const btnSend = document.getElementById('sendWhatsapp');
     const errorMsg = document.getElementById('error-msg');
-    const reviewsContainer = document.getElementById('reviews-container');
 
     let selectedService = "";
 
-    // Cargar Reseñas
-    resenas.forEach(r => {
-        const div = document.createElement('div');
-        div.className = 'review-card';
-        div.innerHTML = `<div style="color:var(--gold); margin-bottom:0.5rem">★★★★★</div>
-                         <h4 style="margin-bottom:0.5rem">${r.nombre}</h4>
-                         <p style="font-size:0.85rem; color:var(--gray)">"${r.texto}"</p>`;
-        reviewsContainer.appendChild(div);
-    });
 
     // Lógica Selectores
     Object.keys(vehiculos).sort().forEach(m => {
@@ -113,137 +97,86 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(`https://wa.me/5492613382725?text=${encodeURIComponent(text)}`, '_blank');
     });
 });
-/**
- * Surval Sport Slider Engine
- * Implementación de Loop Infinito por clonado de nodos
- */
+// CARRUSEL TESTIMONIOS – AUTOPLAY INFINITO
+// ======================================
+(() => {
+    const track = document.getElementById("testimonials-track");
+    if (!track) return;
 
-class SurvalSlider {
-    constructor(id) {
-        this.slider = document.getElementById(id);
-        this.track = this.slider.querySelector('.slider-track');
-        this.slides = Array.from(this.track.children);
-        this.nextBtn = this.slider.querySelector('.next');
-        this.prevBtn = this.slider.querySelector('.prev');
-        this.pagination = this.slider.querySelector('.slider-pagination');
-        
-        this.index = 1; // Empezamos en 1 debido al clon inicial
-        this.isTransitioning = false;
-        this.autoplayInterval = 5000;
-        this.timer = null;
+    const slides = track.children;
+    const prevBtn = document.getElementById("test-prev");
+    const nextBtn = document.getElementById("test-next");
+    const pagination = document.getElementById("test-pagination");
 
-        // Touch handling
-        this.startX = 0;
-        this.currentTranslate = 0;
+    let index = 0;
+    const total = slides.length;
+    let autoplayInterval;
+    const AUTOPLAY_DELAY = 4500; // 4.5s suave
 
-        this.init();
-    }
-
-    init() {
-        // 1. Clonar primer y último slide para el efecto infinito
-        const firstClone = this.slides[0].cloneNode(true);
-        const lastClone = this.slides[this.slides.length - 1].cloneNode(true);
-
-        this.track.appendChild(firstClone);
-        this.track.insertBefore(lastClone, this.slides[0]);
-
-        // 2. Crear dots de paginación
-        this.slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => this.goTo(i + 1));
-            this.pagination.appendChild(dot);
+    // Crear dots
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement("span");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dot.addEventListener("click", () => {
+            goTo(i);
+            restartAutoplay();
         });
-
-        // 3. Posicionar inicialmente el track
-        this.updatePosition(false);
-
-        // 4. Event Listeners
-        this.nextBtn.addEventListener('click', () => this.moveNext());
-        this.prevBtn.addEventListener('click', () => this.movePrev());
-        
-        this.track.addEventListener('transitionend', () => this.checkEdge());
-        
-        // Autoplay logic
-        this.startAutoplay();
-        this.slider.addEventListener('mouseenter', () => this.stopAutoplay());
-        this.slider.addEventListener('mouseleave', () => this.startAutoplay());
-
-        // Touch events
-        this.track.addEventListener('touchstart', (e) => this.startX = e.touches[0].clientX);
-        this.track.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].clientX;
-            if (this.startX - endX > 50) this.moveNext();
-            if (this.startX - endX < -50) this.movePrev();
-        });
+        pagination.appendChild(dot);
     }
 
-    updatePosition(animate = true) {
-        this.track.style.transition = animate ? `transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)` : 'none';
-        this.track.style.transform = `translateX(-${this.index * 100}%)`;
-        this.updateDots();
+    const dots = pagination.children;
+
+    function update() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        [...dots].forEach(d => d.classList.remove("active"));
+        dots[index].classList.add("active");
     }
 
-    moveNext() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.index++;
-        this.updatePosition();
+    function goTo(i) {
+        index = i;
+        update();
     }
 
-    movePrev() {
-        if (this.isTransitioning) return;
-        this.isTransitioning = true;
-        this.index--;
-        this.updatePosition();
+    function next() {
+        index = (index + 1) % total;
+        update();
     }
 
-    checkEdge() {
-        this.isTransitioning = false;
-        const totalSlides = this.track.children.length;
-
-        if (this.index >= totalSlides - 1) {
-            this.index = 1;
-            this.updatePosition(false);
-        }
-        if (this.index <= 0) {
-            this.index = totalSlides - 2;
-            this.updatePosition(false);
-        }
+    function prev() {
+        index = (index - 1 + total) % total;
+        update();
     }
 
-    updateDots() {
-        const dots = Array.from(this.pagination.children);
-        let activeDotIndex = this.index - 1;
-        
-        // Ajuste para clones
-        if (this.index >= this.slides.length + 1) activeDotIndex = 0;
-        if (this.index <= 0) activeDotIndex = this.slides.length - 1;
-
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === activeDotIndex);
-        });
+    // Autoplay
+    function startAutoplay() {
+        autoplayInterval = setInterval(next, AUTOPLAY_DELAY);
     }
 
-    goTo(targetIndex) {
-        if (this.isTransitioning) return;
-        this.index = targetIndex;
-        this.updatePosition();
+    function stopAutoplay() {
+        clearInterval(autoplayInterval);
     }
 
-    startAutoplay() {
-    this.stopAutoplay();
-    this.timer = setInterval(() => this.moveNext(), this.autoplayInterval);
+    function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
     }
 
+    // Eventos
+    nextBtn.addEventListener("click", () => {
+        next();
+        restartAutoplay();
+    });
 
-    stopAutoplay() {
-        clearInterval(this.timer);
-    }
-}
+    prevBtn.addEventListener("click", () => {
+        prev();
+        restartAutoplay();
+    });
 
-// Instanciar slider al cargar DOM
-document.addEventListener('DOMContentLoaded', () => {
-    new SurvalSlider('main-slider');
-});
+    track.addEventListener("mouseenter", stopAutoplay);
+    track.addEventListener("mouseleave", startAutoplay);
+
+    // Init
+    update();
+    startAutoplay();
+})();
